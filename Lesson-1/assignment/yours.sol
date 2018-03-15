@@ -19,12 +19,13 @@ pragma solidity ^0.4.14;
           
           if(employee!=0x0){
               uint payment=salary*(now-lastPayday)/payPuration;
+              lastPayday=now;
               employee.transfer(payment);
           }
           
           employee=e;
           salary=s * 1 ether;
-          lastPayday=now;
+          
       }
       
       //公司资金账户
