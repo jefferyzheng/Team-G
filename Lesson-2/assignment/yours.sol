@@ -57,7 +57,9 @@ contract Payroll{
         var (employee,index)=_findEmployee(employeeid);
         
         _partialPaid(employee);
+        total-=employees[index].salary;
         employees[index].salary=salary * 1 ether;
+        total+=employees[index].salary;
         employees[index].lastPayday=now;
     }
     //充值
