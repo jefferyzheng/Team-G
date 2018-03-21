@@ -63,10 +63,10 @@ contract Payroll{
     }
     
     //更新员工支付地址
-    function changePaymentAddress(address employeeid,address new_employeeid) onlyOwner employeeExist(employeeid) {
-        var employee=employees[employeeid];
+    function changePaymentAddress(address new_employeeid) onlyOwner employeeExist(msg.sender) {
+        var employee=employees[msg.sender];
         _partialPaid(employee);
-        employees[employeeid].id=new_employeeid;
+        employees[msg.sender].id=new_employeeid;
     }
     
     //更新员工信息
