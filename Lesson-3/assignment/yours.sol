@@ -17,7 +17,7 @@ contract Payroll{
         uint salary;
         uint lastPayday;
     }
-    mapping(address =>Employee) employees;
+    mapping(address =>Employee) public employees;
     
     //判断合约者是owner
     modifier onlyOwner{
@@ -30,6 +30,7 @@ contract Payroll{
         assert(employee.id!=0x0);
         _;
     }
+    
     
     function Payroll(){
         owner=msg.sender;
@@ -64,7 +65,8 @@ contract Payroll{
     //更新员工支付地址
     function changePaymentAddress(address employeeid,address new_employeeid) onlyOwner employeeExist(employeeid) {
         var employee=employees[employeeid];
-        employee.id=new_employeeid;
+        _partialPaid(employee);
+        employees[employeeid].id=new_employeeid;
     }
     
     //更新员工信息
